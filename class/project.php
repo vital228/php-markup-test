@@ -36,11 +36,15 @@
       $stmt->bindParam(1, $this->id);
       $stmt->execute();
 
-      $row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-      $this->name = $row["name"];
-      $this->description = $row["description"];
-      $this->image = $row["image"];
+      if ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+        $this->name = $row["name"];
+        $this->description = $row["description"];
+        $this->image = $row["image"];
+        return true;
+      }
+      else{
+        return false;
+      }
     }
 
     function edit()

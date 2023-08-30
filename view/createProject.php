@@ -13,11 +13,15 @@
   $errors = "";
   if (isset($_GET['id'])){
     $project->id = $_GET['id'];
-    $project->readById();
-    $id =  $_GET['id'];
-    $name = $project->name;
-    $description = $project->description;
-    $image = $project->image;
+    if ($project->readById()){
+      $id =  $_GET['id'];
+      $name = $project->name;
+      $description = $project->description;
+      $image = $project->image;
+    }
+    else{
+      $errors = "Такого проекта нет";
+    }
   }
   require_once "view/editForm.php";
  ?>

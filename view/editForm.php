@@ -15,12 +15,12 @@
       </div>
       <input type="file" name="ufile">
       <div>
-        <a href="/" class="btn btn-success">Вернуться</a>
+        <a href="/" class="btn btn-primary">Вернуться</a>
         <input type="submit" value="Сохранить" class="btn btn-success" name="save_button">
       </div>
       <div>
         <?php if ($errors != ""): ?>
-          <h3> <?=$errors?></h3>
+          <p>*<?=$errors?></p>
         <?php endif ?>
       </div>
     </form>

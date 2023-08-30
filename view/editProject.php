@@ -13,7 +13,7 @@
     $errors = "";
     if ($_POST['name'] == "" || ($can_upload != true && $can_upload != false)){
       if ($_POST['name'] == ""){
-        $errors .= "Название не может быть пустым.";
+        $errors .= "Название не может быть пустым. ";
       }
       $errors .= $can_upload;
     }
@@ -30,8 +30,9 @@
       else if ($can_upload == false) {
         if (isset($_POST['deleteImage']) && $_POST['deleteImage'] == "on" && $_POST['path_image']!="image/ImageNull.jpg"){
           unlink($_POST['path_image']);
+          $project->image = "image/ImageNull.jpg";
         }
-        $project->image = "image/ImageNull.jpg";
+        $project->image = $_POST['path_image'];
       }
 
       if (isset($_POST['id'])){
@@ -52,11 +53,15 @@
   }
   else{
     $project->id = $_POST['id'];
-    $project->readById();
-    $id = $_POST['id'];
-    $name = $project->name;
-    $description = $project->description;
-    $image = $project->image;
+    if ($project->readById()){
+      $id =  $_POST['id'];
+      $name = $project->name;
+      $description = $project->description;
+      $image = $project->image;
+    }
+    else{
+      $errors = "Такого проекта нет";
+    }
   }
 
 
